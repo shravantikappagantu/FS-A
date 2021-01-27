@@ -43,7 +43,7 @@ so the output is system
 */
 
 import java.util.*;
-class test{
+class 4_2{
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         String s = sc.next();
