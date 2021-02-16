@@ -1,0 +1,274 @@
+﻿Program1
+
+Ramu  has given a string which will only contain lower case alphabets(a-z). 
+He wants to reduce the string by doing a series of operations. 
+In each operation he selects a pair of adjacent lowercase letters that are same, and he will remove them. 
+For example, the word "ccd" would be "d" in one operation.
+Ramu work is to delete as many characters as possible using the method and print final string. 
+If the final string is empty then print  "-1"
+
+
+Sample Test Case-1
+input = addcbccttt
+output = acbt
+
+Explanation
+ramu performs the following sequence of operations to get the final string.
+addcbccttt -->  acbccttt --> acbttt --> acbt
+
+input = aa
+output = -1
+
+input = dood
+
+Explanation
+following operations to get the final string
+dood → dd → -1
+
+    import java.util.Scanner;
+    class Test{
+     public static void removeAdjacentDuplicateCharacters(String str) {
+         for (int i = 1; i < str.length(); i++) {
+                 if (str.charAt(i) == str.charAt(i-1)) {
+                     str = str.substring(0, i-1) + str.substring(i+1);
+                     i = 0;
+                 }
+             }
+            if (str.length() == 0) 
+                System.out.println(-1);
+             else 
+                System.out.println (str);
+            
+    }
+        public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+            String str = sc.next();
+            removeAdjacentDuplicateCharacters(str);
+        }
+    }
+
+case = 1
+input = aaabccddd
+output = abd
+
+case = 2
+input = aa
+output = -1
+
+case = 3
+input = abcdddccdcb
+output = a
+
+case = 4
+input = apple
+output = ale 
+
+case = 5
+input = abddab
+output = abab
+
+case = 6
+input = yyy
+output = y
+
+
+
+
+Program-2
+
+Leela wants to win every time. 
+She will be given a pair of Integers(a,b), Which are Positive Prime numbers. 
+
+A prime number is an integer greater than 1 that has no positive divisors 
+other than 1 and itself.
+
+-Their absolute difference is exactly equal to  2     [|b-a|=2].
+
+She will be given a range of integers (i,j) Both Inclusive 
+Help Leela find such pairs which are in the range(i,j)
+
+Note that pairs (a,b) and (b,a) are considered to be the same pair.
+
+Print 0 if no such pairs exists
+
+Sample Test Case
+input = 3 13
+output = 3
+
+Explanation1:
+There are three pairs of twins: (3,5),(5,7) and (11,13).
+
+
+import java.util.*;
+class Test {
+    private static boolean isPrime(int num) {
+        if (num < 2) return false;
+        if (num == 2) return true;
+        if (num % 2 == 0) return false;
+        for (int i = 3; i * i <= num; i += 2)
+            if (num % i == 0) return false;
+        return true;
+	}
+
+    public static void main(String[] args) {
+       Scanner sc= new Scanner(System.in);
+        int m=sc.nextInt();
+        int n=sc.nextInt();
+        int count=0;
+        for(int i=m;i<=n;i++)
+        {
+            boolean a=isPrime(i);
+            boolean b=false;
+            if(a==true  && (i+2)<=n)
+                {
+                b=isPrime(i+2);
+                if(b==true)
+                    count++;
+            }
+        }
+        System.out.println(count);
+    }
+}
+
+
+//backend testcases
+case =1
+input =3 13
+output =3
+
+case =2
+input =4 5
+output =0
+
+case =3
+input =1 1000
+output =35
+
+case =4
+input =13 956
+output =32
+
+
+case = 5
+input = 13 3
+output = 0
+
+
+
+
+program-3
+
+Ramesh is given a task to find the 
+number of valid brackets for a given length 'n'
+
+input = 2
+output = 1 
+
+Explanation 
+There is only possible valid brackets of length 2, "[]"
+
+input = 4
+output = 2 
+
+Explanation 
+Possible valid brakets of length 4 are "[[]]" and "[][]" 
+
+input = 6
+output = 5
+
+Explanation 
+Possible valid brackets are [[[]]], [][[]], [][][], [[]][] and [[][]]
+
+
+input = 1
+output = 0
+
+Explanation 
+Possible valid expressions with legth 1 is 0.
+
+input = 1
+output = 0
+
+Explanation 
+Possible valid expressions with legth 1 is 0.
+
+
+
+
+import java.util.*;
+class Test { 
+  
+    int numberBrackets(int n) 
+    { 
+
+        int dp[] = new int[n + 2]; 
+  
+        dp[0] = dp[1]=1; 
+
+		for (int i = 2; i <= n; i++)  
+        { 
+            dp[i] = 0; 
+            for (int j = 0; j < i; j++)  
+              dp[i]  = dp[i] + (dp[j]  * dp[i - j - 1]); 
+       } 
+  
+        return dp[n]; 
+    } 
+  
+    
+	public static void main(String[] args) 
+    { 
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        if(n<0)
+        {
+        System.out.print(0);
+        System.exit(1);
+        }
+		if(n%2==0)
+       System.out.print(new Test().numberBrackets(n/2) + " "); 
+		else
+			System.out.print(0);
+        
+    } 
+} 
+
+case = 1
+input = 2
+output = 1 
+
+case = 2
+input = 4
+output = 2 
+
+case = 3
+input = 6
+output = 5
+
+case = 4
+input = 1
+output = 0
+
+case = 5
+input = -2
+output = 0
+
+case = 6
+input = 3
+output = 0
+
+case = 7
+input = 17
+output = 0
+
+case = 8
+input = 20
+output = 16796
+
+case = 9
+input = 18
+output = 4862
+
+case = 10
+input = 9
+output = 0
